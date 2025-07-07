@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Python3 Build and Deploy
 
 on:
   workflow_dispatch: {}
@@ -9,9 +9,9 @@ on:
 env:
   applicationfolder: srcpython
   AWS_REGION: us-east-1
-  S3BUCKET: codestack8-webappdeploymentbucket-qfkvzbvpi1kz
-  awsappname: CodeDeployAppNameWithASG
-  awsdeployname: CodeDeployGroupName
+  S3BUCKET: codedeployp1-webappdeploymentbucket-4rpomtt12gdv
+  awsappname: codedeploypythonapp
+  awsdeployname: codedeploypythongroup
 
 jobs:
   build:

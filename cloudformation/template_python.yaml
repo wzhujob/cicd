@@ -82,6 +82,12 @@ Parameters:
     Type: String
     Default: wzhujob/cicd
     Description: GitHub repository name Ex-TestUser/TestCodeDeploy
+  CodeDeployAppName:
+    Type: String
+    Default: codedeploypythonapp
+  DeploymentGroupName:
+    Type: String
+    Default: codedeploypythongroup
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -266,14 +272,14 @@ Resources:
   WebappApplication:
     Type: AWS::CodeDeploy::Application
     Properties:
-      ApplicationName: CodeDeployAppNameWithASG
+      ApplicationName: !Ref CodeDeployAppName
   WebappDeploymentGroup:
     Type: AWS::CodeDeploy::DeploymentGroup
     Properties:
       ApplicationName: !Ref WebappApplication
       ServiceRoleArn: !GetAtt CodeDeployRole.Arn
       DeploymentConfigName: CodeDeployDefault.OneAtATime
-      DeploymentGroupName: CodeDeployGroupName
+      DeploymentGroupName: !Ref DeploymentGroupName
       AutoRollbackConfiguration:
         Enabled: true
         Events:
