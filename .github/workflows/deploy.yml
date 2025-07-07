@@ -2,9 +2,6 @@ name: Python3 Build and Deploy
 
 on:
   workflow_dispatch: {}
-  #push:
-    #branches: [ main ]
-  #pull_request:
 
 env:
   applicationfolder: srcpython
@@ -30,18 +27,8 @@ jobs:
           role-session-name: GitHub-Action-Role
           aws-region: ${{ env.AWS_REGION }}
 
-      #- name: Set up JDK 1.8
-      #  uses: actions/setup-java@v1
-      #  with:
-      #    java-version: 1.8
-
       - name: chmod
         run: chmod -R +x ./.github
-
-      #- name: Build and Package Maven
-      #  id: package
-      #  working-directory: ${{ env.applicationfolder }}
-      #  run: $GITHUB_WORKSPACE/.github/scripts/build.sh
 
       - name: Upload Artifact to s3
         working-directory: ${{ env.applicationfolder }}
