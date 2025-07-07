@@ -1,17 +1,16 @@
 name: Build and Deploy
 
 on:
-  workflow_dispatch: {}
-  #push:
-    #branches: [ main ]
-  #pull_request:
+  #workflow_dispatch: {}
+  push:
+    branches: [ main ]
+  pull_request:
 
 env:
-  applicationfolder: srcpython
+  applicationfolder: spring-boot-hello-world-example
   AWS_REGION: us-east-1
   S3BUCKET: codestack8-webappdeploymentbucket-qfkvzbvpi1kz
-  awsappname: CodeDeployAppNameWithASG
-  awsdeployname: CodeDeployGroupName
+
 
 jobs:
   build:
@@ -30,22 +29,22 @@ jobs:
           role-session-name: GitHub-Action-Role
           aws-region: ${{ env.AWS_REGION }}
 
-      #- name: Set up JDK 1.8
-      #  uses: actions/setup-java@v1
-      #  with:
-      #    java-version: 1.8
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
 
       - name: chmod
         run: chmod -R +x ./.github
 
-      #- name: Build and Package Maven
-      #  id: package
-      #  working-directory: ${{ env.applicationfolder }}
-      #  run: $GITHUB_WORKSPACE/.github/scripts/build.sh
+      - name: Build and Package Maven
+        id: package
+        working-directory: ${{ env.applicationfolder }}
+        run: $GITHUB_WORKSPACE/.github/scripts/build.sh
 
       - name: Upload Artifact to s3
-        working-directory: ${{ env.applicationfolder }}
-        run: aws s3 cp *.py s3://${{ env.S3BUCKET }}/
+        working-directory: ${{ env.applicationfolder }}/target
+        run: aws s3 cp *.war s3://${{ env.S3BUCKET }}/
         
   deploy:
     needs: build
@@ -64,4 +63,4 @@ jobs:
     - run: |
         echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
         commit_hash=`git rev-parse HEAD`
-        aws deploy create-deployment --application-name ${{ env.awsappname }} --deployment-group-name ${{ env.awsdeployname }} --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
+        aws deploy create-deployment --application-name CodeDeployAppNameWithASG --deployment-group-name CodeDeployGroupName --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures

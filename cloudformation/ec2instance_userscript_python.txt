@@ -1,0 +1,7 @@
+#set the correct time zone
+timedatectl set-timezone America/New_York
+
+#install python3
+sudo yum update -y
+sudo yum install python3 -y
+python3 --version

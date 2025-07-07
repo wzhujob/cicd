@@ -4,4 +4,7 @@
 set -xe
 
 # Start Tomcat, the application server.
-service tomcat start
+#service tomcat start
+#start the python3 server
+#python3 /usr/local/pythonserver/httpserver.py
+sudo -u pythonapp python3 /usr/local/pythonserver/httpserver.py

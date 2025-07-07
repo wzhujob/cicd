@@ -5,22 +5,22 @@ files:
     destination: /usr/local/codedeployresources
 hooks:
   ApplicationStop:
-    - location: aws/scripts_python/application-stop.sh
+    - location: aws/scripts/application-stop.sh
       timeout: 300
       runas: root
   BeforeInstall:
-    - location: aws/scripts_python/before-install.sh
+    - location: aws/scripts/before-install.sh
       timeout: 300
       runas: root
   AfterInstall:
-    - location: aws/scripts_python/after-install.sh
+    - location: aws/scripts/after-install.sh
       timeout: 300
       runas: root
   ApplicationStart:
-    - location: aws/scripts_python/application-start.sh
+    - location: aws/scripts/application-start.sh
       timeout: 300
       runas: root
   ValidateService:
-    - location: aws/scripts_python/validate-service.sh
+    - location: aws/scripts/validate-service.sh
       timeout: 300
       runas: root
