@@ -30,9 +30,15 @@ jobs:
       - name: chmod
         run: chmod -R +x ./.github
 
+      - name: echo file structure
+        run: |
+          echo "get directory structure"
+          pwd
+          ls -al
+
       - name: Upload Artifact to s3
         working-directory: ${{ env.applicationfolder }}
-        run: aws s3 cp ${{ env.applicationfolder }}/*.py s3://${{ env.S3BUCKET }}/
+        run: aws s3 cp /${{ env.applicationfolder }}/*.py s3://${{ env.S3BUCKET }}/
         
   deploy:
     needs: build
