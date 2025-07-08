@@ -6,7 +6,7 @@ on:
 env:
   applicationfolder: srcpython
   AWS_REGION: us-east-1
-  S3BUCKET: codedeployp1-webappdeploymentbucket-4rpomtt12gdv
+  S3BUCKET: codedeploy1whiteboatbucket
   awsappname: codedeploypythonapp
   awsdeployname: codedeploypythongroup
 
