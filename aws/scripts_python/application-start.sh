@@ -7,4 +7,4 @@ set -xe
 #service tomcat start
 #start the python3 server
 #python3 /usr/local/pythonserver/httpserver.py
-sudo -u pythonapp python3 /usr/local/pythonserver/httpserver.py
+sudo -u pythonapp nohup python3 /usr/local/pythonserver/httpserver.py > /usr/local/pythonserver/output.txt 2>&1 </dev/null &
